@@ -1,25 +1,26 @@
-NAME = philo
-CC = cc 
-FLAGS = -Wall -Werror -Wextra
-HEADER = includes/philo.h
+NAME    = philo
+CC      = cc
+CFLAGS  = -Wall -Werror -Wextra
 
-SRC = src/main.c src/init.c src/philosopher.c src/print.c src/handle_input.c src/grim_reaper.c src/get_time.c src/free_mem.c
+SRCS    = src/main.c src/init.c src/philosopher.c \
+          src/print.c src/handle_input.c src/grim_reaper.c \
+          src/get_time.c src/free_mem.c
 
-OBJ = $(SRC:.c=.o)
+OBJS    = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-%.o: %.c $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

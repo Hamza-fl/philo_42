@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_mem.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 20:20:21 by hfalati           #+#    #+#             */
+/*   Updated: 2025/05/26 20:20:31 by hfalati          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
 void	destroy_mutexes(t_info *info)
@@ -17,7 +29,7 @@ void	destroy_mutexes(t_info *info)
 
 void	*free_info(t_info *info)
 {
-	int	i;
+	unsigned int	i;
 
 	if (!info)
 		return (NULL);
