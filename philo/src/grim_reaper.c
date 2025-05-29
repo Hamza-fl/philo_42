@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grim_reaper.c                                      :+:      :+:    :+:   */
+/*   manage_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -60,7 +60,7 @@ bool	end_condition_reached(t_info *info)
 	return (false);
 }
 
-void	*grim_reaper(void *data)
+void	*manage_philos(void *data)
 {
 	t_info			*info;
 

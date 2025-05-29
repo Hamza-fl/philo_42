@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:20:48 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/29 10:08:58 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_info
 {
 	time_t			start_time;
 	unsigned int	nb_philos;
-	pthread_t		grim_reaper;
+	pthread_t		manage_philos;
 	time_t			time_to_die;
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
@@ -79,7 +79,7 @@ time_t	get_time_ms(void);
 
 //dinner
 void	*philosopher(void *data);
-void	*grim_reaper(void *data);
+void	*manage_philos(void *data);
 
 //time
 void	philo_sleep(t_info *info, time_t sleep_time);

@@ -6,13 +6,13 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:20:38 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:39:51 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/29 10:13:39 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	eat_sleep_routine(t_philo *philo)
+void	philo_start(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->info->fork_locks[philo->fork[0]]);
 	write_status(philo, false, FORK_1);
@@ -82,7 +82,7 @@ void	*philosopher(void *data)
 		philo_think(philo, true);
 	while (has_simulation_stopped(philo->info) == false)    
 	{
-		eat_sleep_routine(philo);
+		philo_start(philo);
 		philo_think(philo, false);
 	}
 	return (NULL);

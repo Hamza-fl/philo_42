@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:20:34 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:39:32 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/29 09:36:58 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 void	assign_forks(t_philo *philo)
 {
-	philo->fork[0] = philo->id;
-	philo->fork[1] = (philo->id + 1) % philo->info->nb_philos;
 	if (philo->id % 2)
 	{
 		philo->fork[0] = (philo->id + 1) % philo->info->nb_philos;
 		philo->fork[1] = philo->id;
 	}
+    else
+    {
+	    philo->fork[0] = philo->id;
+	    philo->fork[1] = (philo->id + 1) % philo->info->nb_philos;
+    }
 }
 
 t_philo    **init_philo(t_info *info)

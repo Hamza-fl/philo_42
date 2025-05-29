@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:37:39 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/29 10:08:58 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,13 @@ bool	start_dinner(t_info *info)
 	while (i < info->nb_philos)
 	{
 		if (pthread_create(&info->philos[i]->thread, NULL, &philosopher, info->philos[i]) != 0)
-        {
-            error_failure(info);
-			return (0);
-        }
+			return (error_failure(info), 0);
         i++;
 	}
 	if (info->nb_philos > 1)
 	{
-		if (pthread_create(&info->grim_reaper, NULL, &grim_reaper, info) != 0)
-        {
-            error_failure(info);
-			return (0);
-        }
+		if (pthread_create(&info->manage_philos, NULL, &manage_philos, info) != 0)
+			return (error_failure(info), 0);
     }
 	return (true);
 }
@@ -49,7 +43,7 @@ void	stop_dinner(t_info	*info)
 		i++;
 	}
 	if (info->nb_philos > 1)
-		pthread_join(info->grim_reaper, NULL);
+		pthread_join(info->manage_philos, NULL);
 	destroy_mutexes(info);
 	free_info(info);
 }

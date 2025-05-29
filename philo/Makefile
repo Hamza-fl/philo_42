@@ -3,7 +3,7 @@ CC      = cc
 CFLAGS  = -Wall -Werror -Wextra
 
 SRCS    = src/main.c src/init.c src/philosopher.c \
-          src/print.c src/handle_input.c src/grim_reaper.c \
+          src/print.c src/handle_input.c src/manage_philos.c \
           src/get_time.c src/free_mem.c
 
 OBJS    = $(SRCS:.c=.o)
