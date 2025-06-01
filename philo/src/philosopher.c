@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:20:38 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/29 10:13:39 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/30 00:10:09 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	philo_start(t_philo *philo)
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	philo_sleep(philo->info, philo->info->time_to_eat);
-	if (has_simulation_stopped(philo->info) == false)
+	if (check_if_end(philo->info) == false)
 	{
 		pthread_mutex_lock(&philo->meal_time_lock);
 		philo->times_ate += 1;
@@ -73,14 +73,14 @@ void	*philosopher(void *data)
 	pthread_mutex_lock(&philo->meal_time_lock);
 	philo->last_meal = philo->info->start_time;
 	pthread_mutex_unlock(&philo->meal_time_lock);
-	dinner_start(philo->info->start_time);
+	all_philo_run(philo->info->start_time);
 	if (philo->info->time_to_die == 0)
 		return (NULL);
 	if (philo->info->nb_philos == 1)
 		return (one_philo(philo));
 	else if (philo->id % 2)
 		philo_think(philo, true);
-	while (has_simulation_stopped(philo->info) == false)    
+	while (check_if_end(philo->info) == false)    
 	{
 		philo_start(philo);
 		philo_think(philo, false);

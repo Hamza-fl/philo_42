@@ -68,7 +68,7 @@ void	*manage_philos(void *data)
 	if (info->must_eat_count == 0)
 		return (NULL);
 	set_sim_stop_flag(info, false);
-	dinner_start(info->start_time);
+	all_philo_run(info->start_time);
 	while (true)
 	{
 		if (end_condition_reached(info) == true)

@@ -6,13 +6,13 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:20:25 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:38:28 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/30 18:24:54 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool	has_simulation_stopped(t_info *info)
+bool	check_if_end(t_info *info)
 {
 	bool	r;
 
@@ -31,7 +31,7 @@ void	philo_sleep(t_info *info, time_t sleep_time)
 	wake_up = get_time_ms() + sleep_time;
 	while (get_time_ms() < wake_up)
 	{
-		if (has_simulation_stopped(info))
+		if (check_if_end(info))
 			break ;
 		usleep(100);
 	}
@@ -45,7 +45,7 @@ time_t	get_time_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	dinner_start(time_t start_time)
+void	all_philo_run(time_t start_time)
 {
 	while (get_time_ms() < start_time)
 		continue ;

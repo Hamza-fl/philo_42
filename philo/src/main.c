@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/29 10:08:58 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/29 23:59:14 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	start_dinner(t_info *info)
 {
 	unsigned int	i;
 
-	info->start_time = get_time_ms() + (info->nb_philos * 2 * 10);
 	i = 0;
+	info->start_time = get_time_ms() + (info->nb_philos * 2);
 	while (i < info->nb_philos)
 	{
 		if (pthread_create(&info->philos[i]->thread, NULL, &philosopher, info->philos[i]) != 0)

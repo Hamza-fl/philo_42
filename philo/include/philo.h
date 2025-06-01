@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/29 10:08:58 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/05/30 00:10:09 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*free_info(t_info *info);
 t_info  *init_info(int ac, char **av);
 
 //get time
-void	dinner_start(time_t start_time);
+void	all_philo_run(time_t start_time);
 time_t	get_time_ms(void);
 
 //dinner
@@ -85,7 +85,7 @@ void	*manage_philos(void *data);
 void	philo_sleep(t_info *info, time_t sleep_time);
 
 //utlis
-bool	has_simulation_stopped(t_info *info);
+bool	check_if_end(t_info *info);
 
 //print
 void	write_status(t_philo *philo, bool reaper_report, t_status status);
