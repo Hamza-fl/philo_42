@@ -24,9 +24,8 @@ bool	kill_philo(t_philo *philo)
 	time_t	time;
 
 	time = get_time_ms();
-	if ((time - philo->last_meal) > philo->info->time_to_die)
+	if ((time - philo->last_meal) >= philo->info->time_to_die)
 	{
-		printf("last%ld------die=%ld\n", (time - philo->last_meal), philo->info->time_to_die);
 		set_sim_stop_flag(philo->info, true);
 		write_status(philo, true, DIED);
 		pthread_mutex_unlock(&philo->meal_time_lock);
