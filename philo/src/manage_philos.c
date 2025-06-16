@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_philos.c                                      :+:      :+:    :+:   */
+/*   manage_philos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:20:28 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/26 19:38:49 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/01 18:15:06 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	set_sim_stop_flag(t_info *info, bool state)
 {
 	pthread_mutex_lock(&info->sim_stop_lock);
-		info->sim_stop = state;
+	info->sim_stop = state;
 	pthread_mutex_unlock(&info->sim_stop_lock);
 }
 
@@ -48,7 +48,7 @@ bool	end_condition_reached(t_info *info)
 			return (true);
 		if (info->must_eat_count != -1)
 			if (info->philos[i]->times_ate < (unsigned int)info->must_eat_count)
-                all_ate_enough = false;
+				all_ate_enough = false;
 		pthread_mutex_unlock(&info->philos[i]->meal_time_lock);
 		i++;
 	}
@@ -62,7 +62,7 @@ bool	end_condition_reached(t_info *info)
 
 void	*manage_philos(void *data)
 {
-	t_info			*info;
+	t_info	*info;
 
 	info = (t_info *)data;
 	if (info->must_eat_count == 0)

@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:20:38 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/01 14:14:13 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/01 18:14:27 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	philo_think(t_philo *philo, bool silent)
 {
 	time_t	time_to_think;
 
+	if (philo->info->nb_philos % 2 == 0)
+		return ;
 	pthread_mutex_lock(&philo->meal_time_lock);
-	time_to_think = (philo->info->time_to_die - (get_time_ms() - philo->last_meal) - philo->info->time_to_eat) / 2;
+	time_to_think = (philo->info->time_to_die - (get_time_ms() - \
+		philo->last_meal) - philo->info->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->meal_time_lock);
 	if (time_to_think < 0)
 		time_to_think = 0;
@@ -80,7 +83,7 @@ void	*philosopher(void *data)
 		return (one_philo(philo));
 	else if (philo->id % 2)
 		philo_think(philo, true);
-	while (check_if_end(philo->info) == false)    
+	while (check_if_end(philo->info) == false)
 	{
 		philo_start(philo);
 		philo_think(philo, false);

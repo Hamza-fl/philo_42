@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/05/30 00:10:09 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/01 18:12:39 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ typedef enum e_status
 }	t_status;
 
 //handle input
-bool    handle_input(int ac, char **av);
-int ft_str_to_digit(char *str);
+bool	handle_input(int ac, char **av);
+int		ft_str_to_digit(char *str);
 
 //free 
 void	*error_null(t_info *info);
-int	error_failure(t_info *info);
+int		error_failure(t_info *info);
 void	destroy_mutexes(t_info *info);
 void	*free_info(t_info *info);
 
 //init
-t_info  *init_info(int ac, char **av);
+t_info	*init_info(int ac, char **av);
 
 //get time
 void	all_philo_run(time_t start_time);
