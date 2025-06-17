@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:20:34 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/01 18:17:42 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/17 12:14:59 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ t_philo	**init_philo(t_info *info)
 {
 	t_philo			**philos;
 	unsigned int	i;
+	unsigned int	j;
 
+	j = 0;
 	philos = malloc(sizeof(t_philo) * info->nb_philos);
 	if (!philos)
 		return (error_null(info), NULL);
@@ -39,9 +41,28 @@ t_philo	**init_philo(t_info *info)
 	{
 		philos[i] = malloc(sizeof(t_philo));
 		if (!philos[i])
+		{
+			while (j < i)
+			{
+				pthread_mutex_destroy(&philos[i]->meal_time_lock);
+				free(philos[j]);
+				j++;
+			}
+			free(philos);
 			return (error_null(info), NULL);
+		}
 		if (pthread_mutex_init(&philos[i]->meal_time_lock, 0) != 0)
+		{
+			while (j <= i)
+			{
+				if (j < i)
+					pthread_mutex_destroy(&philos[i]->meal_time_lock);
+				free(philos[j]);
+				j++;
+			}
+			free(philos);
 			return (error_null(info), NULL);
+		}
 		philos[i]->info = info;
 		philos[i]->id = i;
 		philos[i]->times_ate = 0;
@@ -55,6 +76,7 @@ pthread_mutex_t	*init_forks(t_info *info)
 {
 	pthread_mutex_t	*forks;
 	unsigned int	i;
+	unsigned int	j;
 
 	forks = malloc(sizeof(pthread_mutex_t) * info->nb_philos);
 	if (!forks)
@@ -63,10 +85,14 @@ pthread_mutex_t	*init_forks(t_info *info)
 		return (NULL);
 	}
 	i = 0;
+	j = -1;
 	while (i < info->nb_philos)
 	{
 		if (pthread_mutex_init(&forks[i], 0) != 0)
 		{
+			while (++j < i)
+				pthread_mutex_destroy(&forks[i]);
+			free(forks);
 			error_null(info);
 			return (NULL);
 		}

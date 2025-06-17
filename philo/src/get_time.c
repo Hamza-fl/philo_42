@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:20:25 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/01 18:13:05 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/17 16:54:31 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,4 @@ time_t	get_time_ms(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	all_philo_run(time_t start_time)
-{
-	while (get_time_ms() < start_time)
-		continue ;
 }

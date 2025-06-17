@@ -34,7 +34,7 @@ void	write_status(t_philo *philo, bool reaper_report, t_status status)
 		print_status(philo, "is sleeping");
 	else if (status == THINKING)
 		print_status(philo, "is thinking");
-	else if (status == FORK_1 || status == FORK_2)
+	else if (status == FORK)
 		print_status(philo, "has taken a fork");
 	pthread_mutex_unlock(&philo->info->write_lock);
 }

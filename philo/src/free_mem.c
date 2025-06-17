@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:20:21 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/01 18:12:59 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/17 11:48:20 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	destroy_mutexes(t_info *info)
 	unsigned int	i;
 
 	i = 0;
-	while (i < info->nb_philos)
+	while (&info->fork_locks[i] && i < info->nb_philos)
 	{
 		pthread_mutex_destroy(&info->fork_locks[i]);
 		pthread_mutex_destroy(&info->philos[i]->meal_time_lock);

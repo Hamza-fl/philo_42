@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:20:28 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/01 18:15:06 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/17 16:54:26 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*manage_philos(void *data)
 	if (info->must_eat_count == 0)
 		return (NULL);
 	set_sim_stop_flag(info, false);
-	all_philo_run(info->start_time);
 	while (true)
 	{
 		if (end_condition_reached(info) == true)
