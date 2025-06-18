@@ -6,43 +6,62 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 17:18:07 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool	start_dinner(t_info *info)
+bool	start_philo_threads(t_info *info)
 {
 	unsigned int	i;
-	unsigned int	j;
 
 	i = 0;
-	j = -1;
 	while (i < info->nb_philos)
 	{
 		if (pthread_create(&info->philos[i]->thread, NULL, \
-		&philosopher, info->philos[i]) != 0)
+			&philosopher, info->philos[i]) != 0)
 		{
 			set_sim_stop_flag(info, true);
-			if (++j < i)
-				pthread_join(info->philos[j]->thread, NULL);
-			return (error_failure(info), 0);
+			while (i > 0)
+			{
+				i--;
+				pthread_join(info->philos[i]->thread, NULL);
+			}
+			return (free_failure(info), false);
 		}
 		i++;
 	}
-	j = -1;
-	if (info->nb_philos > 1)
-	{
-		if (pthread_create(&info->manage_philos, NULL, \
+	return (true);
+}
+
+bool	start_manager_thread(t_info *info)
+{
+	unsigned int	i;
+
+	if (info->nb_philos <= 1)
+		return (true);
+	if (pthread_create(&info->manage_philos, NULL, \
 		&manage_philos, info) != 0)
+	{
+		set_sim_stop_flag(info, true);
+		i = 0;
+		while (i < info->nb_philos)
 		{
-			set_sim_stop_flag(info, true);
-			if (++j < info->nb_philos)
-				pthread_join(info->philos[j]->thread, NULL);
-			return (error_failure(info), 0);
+			pthread_join(info->philos[i]->thread, NULL);
+			i++;
 		}
+		return (free_failure(info), false);
 	}
+	return (true);
+}
+
+bool	start_dinner(t_info *info)
+{
+	if (!start_philo_threads(info))
+		return (false);
+	if (!start_manager_thread(info))
+		return (false);
 	return (true);
 }
 

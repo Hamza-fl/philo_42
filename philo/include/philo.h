@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 17:01:44 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef enum e_status
 
 bool	handle_input(int ac, char **av);
 int		ft_str_to_digit(char *str);
-void	*error_null(t_info *info);
-int		error_failure(t_info *info);
+void	*free_error(t_info *info);
+int		free_failure(t_info *info);
 void	destroy_mutexes(t_info *info);
 void	*free_info(t_info *info);
 t_info	*init_info(int ac, char **av);
@@ -75,5 +75,6 @@ bool	check_if_end(t_info *info);
 void	write_status(t_philo *philo, bool reaper_report, t_status status);
 void	ft_putstr_fd(char *s, int fd);
 void	set_sim_stop_flag(t_info *info, bool state);
+int		init_single_philo(t_philo **philos, t_info *info, unsigned int i);
 
 #endif

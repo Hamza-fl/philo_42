@@ -6,67 +6,34 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:20:34 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 12:14:59 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	assign_forks(t_philo *philo)
-{
-	if (philo->id % 2)
-	{
-		philo->fork[0] = (philo->id + 1) % philo->info->nb_philos;
-		philo->fork[1] = philo->id;
-	}
-	else
-	{
-		philo->fork[0] = philo->id;
-		philo->fork[1] = (philo->id + 1) % philo->info->nb_philos;
-	}
-}
-
 t_philo	**init_philo(t_info *info)
 {
 	t_philo			**philos;
 	unsigned int	i;
-	unsigned int	j;
 
-	j = 0;
 	philos = malloc(sizeof(t_philo) * info->nb_philos);
 	if (!philos)
-		return (error_null(info), NULL);
+		return (free_error(info), NULL);
 	i = 0;
 	while (i < info->nb_philos)
 	{
-		philos[i] = malloc(sizeof(t_philo));
-		if (!philos[i])
+		if (!init_single_philo(philos, info, i))
 		{
-			while (j < i)
+			while (i > 0)
 			{
+				i--;
 				pthread_mutex_destroy(&philos[i]->meal_time_lock);
-				free(philos[j]);
-				j++;
+				free(philos[i]);
 			}
 			free(philos);
-			return (error_null(info), NULL);
+			return (free_error(info), NULL);
 		}
-		if (pthread_mutex_init(&philos[i]->meal_time_lock, 0) != 0)
-		{
-			while (j <= i)
-			{
-				if (j < i)
-					pthread_mutex_destroy(&philos[i]->meal_time_lock);
-				free(philos[j]);
-				j++;
-			}
-			free(philos);
-			return (error_null(info), NULL);
-		}
-		philos[i]->info = info;
-		philos[i]->id = i;
-		philos[i]->times_ate = 0;
-		assign_forks(philos[i]);
 		i++;
 	}
 	return (philos);
@@ -81,7 +48,7 @@ pthread_mutex_t	*init_forks(t_info *info)
 	forks = malloc(sizeof(pthread_mutex_t) * info->nb_philos);
 	if (!forks)
 	{
-		error_null(info);
+		free_error(info);
 		return (NULL);
 	}
 	i = 0;
@@ -93,7 +60,7 @@ pthread_mutex_t	*init_forks(t_info *info)
 			while (++j < i)
 				pthread_mutex_destroy(&forks[i]);
 			free(forks);
-			error_null(info);
+			free_error(info);
 			return (NULL);
 		}
 		i++;
@@ -108,12 +75,12 @@ bool	init_mutexes(t_info *info)
 		return (false);
 	if (pthread_mutex_init(&info->sim_stop_lock, 0) != 0)
 	{
-		error_failure(info);
+		free_failure(info);
 		return (0);
 	}
 	if (pthread_mutex_init(&info->write_lock, 0) != 0)
 	{
-		error_failure(info);
+		free_failure(info);
 		return (0);
 	}
 	return (true);
