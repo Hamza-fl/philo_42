@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:20:25 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 16:54:31 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/19 10:30:54 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	philo_sleep(t_info *info, time_t sleep_time)
 	time_t	wake_up;
 
 	wake_up = get_time_ms() + sleep_time;
-	while (get_time_ms() < wake_up)
+	while (get_time_ms() < (wake_up - 1))
 	{
 		if (check_if_end(info))
 			break ;
-		usleep(100);
+		usleep(500);
 	}
 }
 

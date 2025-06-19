@@ -21,7 +21,8 @@ void	print_status(t_philo *philo, char *str)
 void	write_status(t_philo *philo, bool reaper_report, t_status status)
 {
 	pthread_mutex_lock(&philo->info->write_lock);
-	if (check_if_end(philo->info) == true && reaper_report == false)
+	if ((check_if_end(philo->info) == true && reaper_report == false) \
+		|| (philo->info->must_eat_count == (int)philo->times_ate))
 	{
 		pthread_mutex_unlock(&philo->info->write_lock);
 		return ;

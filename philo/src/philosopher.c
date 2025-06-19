@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:20:38 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 17:19:45 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/18 23:41:19 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*philosopher(void *data)
 	if (philo->info->nb_philos == 1)
 		return (one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(10);
+		usleep(philo->info->time_to_eat / 2);
 	while (check_if_end(philo->info) == false)
 	{
 		philo_start(philo);
