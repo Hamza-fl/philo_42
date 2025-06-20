@@ -6,13 +6,13 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:20:21 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:34:21 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	destroy_mutexes(t_info *info)
+void	ft_destroy_mutexes(t_info *info)
 {
 	unsigned int	i;
 
@@ -53,7 +53,7 @@ void	*free_info(t_info *info)
 int	free_failure(t_info *info)
 {
 	if (info != NULL)
-		destroy_mutexes(info);
+		ft_destroy_mutexes(info);
 	if (info != NULL)
 		free_info(info);
 	return (0);
@@ -62,7 +62,7 @@ int	free_failure(t_info *info)
 void	*free_error(t_info *info)
 {
 	if (info != NULL)
-		destroy_mutexes(info);
+		ft_destroy_mutexes(info);
 	if (info != NULL)
 		free_info(info);
 	return (NULL);

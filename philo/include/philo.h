@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/20 10:11:29 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ bool	handle_input(int ac, char **av);
 int		ft_str_to_digit(char *str);
 void	*free_error(t_info *info);
 int		free_failure(t_info *info);
-void	destroy_mutexes(t_info *info);
+void	ft_destroy_mutexes(t_info *info);
 void	*free_info(t_info *info);
 t_info	*init_info(int ac, char **av);
-void	all_philo_run(time_t start_time);
 time_t	get_time_ms(void);
 void	*philosopher(void *data);
 void	*manage_philos(void *data);

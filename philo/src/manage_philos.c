@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:20:28 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/17 16:54:26 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/20 10:03:11 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	kill_philo(t_philo *philo)
 	time_t	time;
 
 	time = get_time_ms();
-	if ((time - philo->last_meal) >= philo->info->time_to_die)
+	if ((time - philo->last_meal) > philo->info->time_to_die)
 	{
 		set_sim_stop_flag(philo->info, true);
 		write_status(philo, true, DIED);
@@ -37,9 +37,9 @@ bool	kill_philo(t_philo *philo)
 bool	end_condition_reached(t_info *info)
 {
 	unsigned int	i;
-	bool			all_ate_enough;
+	bool			ate_enough;
 
-	all_ate_enough = true;
+	ate_enough = true;
 	i = 0;
 	while (i < info->nb_philos)
 	{
@@ -48,11 +48,11 @@ bool	end_condition_reached(t_info *info)
 			return (true);
 		if (info->must_eat_count != -1)
 			if (info->philos[i]->times_ate < (unsigned int)info->must_eat_count)
-				all_ate_enough = false;
+				ate_enough = false;
 		pthread_mutex_unlock(&info->philos[i]->meal_time_lock);
 		i++;
 	}
-	if (info->must_eat_count != -1 && all_ate_enough == true)
+	if (info->must_eat_count != -1 && ate_enough == true)
 	{
 		set_sim_stop_flag(info, true);
 		return (true);
@@ -72,7 +72,7 @@ void	*manage_philos(void *data)
 	{
 		if (end_condition_reached(info) == true)
 			return (NULL);
-		usleep(1000);
+		usleep(500);
 	}
 	return (NULL);
 }

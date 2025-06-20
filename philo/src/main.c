@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/18 10:12:31 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/19 11:49:36 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	stop_dinner(t_info	*info)
 	}
 	if (info->nb_philos > 1)
 		pthread_join(info->manage_philos, NULL);
-	destroy_mutexes(info);
+	ft_destroy_mutexes(info);
 	free_info(info);
 }
 
