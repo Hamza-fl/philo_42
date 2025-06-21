@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:20:38 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/21 12:14:07 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:26:36 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,12 @@ void	*philosopher(void *data)
 		return (NULL);
 	if (philo->info->time_to_die == 0)
 		return (NULL);
-	pthread_mutex_lock(&philo->info->start_mutex);
-	while (philo->info->simulation_started == false){}
-	pthread_mutex_unlock(&philo->info->start_mutex);
 	if (philo->info->nb_philos == 1)
 		return (one_philo(philo));
 	if (philo->id % 2 == 0)
 		usleep(philo->info->time_to_eat / 2);
+	pthread_mutex_lock(&philo->info->start_mutex);
+	pthread_mutex_unlock(&philo->info->start_mutex);
 	while (check_if_end(philo->info) == false)
 	{
 		philo_start(philo);

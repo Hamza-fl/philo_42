@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/21 11:21:26 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/21 12:28:04 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	start_philo_threads(t_info *info)
 	unsigned int	i;
 
 	i = 0;
+	pthread_mutex_lock(&info->start_mutex);
 	info->simulation_started = false;
 	while (i < info->nb_philos)
 	{
@@ -41,6 +42,7 @@ bool	start_philo_threads(t_info *info)
 	}
 	info->start_time = get_time_ms();
 	info->simulation_started = true;
+	pthread_mutex_unlock(&info->start_mutex);
 	return (true);
 }
 
