@@ -15,7 +15,7 @@
 void	print_status(t_philo *philo, char *str)
 {
 	printf("%ld %d %s\n", get_time_ms() - \
-	philo->info->start_time, philo->id + 1, str);
+		philo->info->start_time, philo->id + 1, str);
 }
 
 void	write_status(t_philo *philo, bool reaper_report, t_status status)

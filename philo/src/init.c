@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:20:34 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/19 11:27:44 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/21 11:17:17 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ bool	init_mutexes(t_info *info)
 		return (0);
 	}
 	if (pthread_mutex_init(&info->write_lock, 0) != 0)
+	{
+		free_failure(info);
+		return (0);
+	}
+	if (pthread_mutex_init(&info->start_mutex, 0) != 0)
 	{
 		free_failure(info);
 		return (0);

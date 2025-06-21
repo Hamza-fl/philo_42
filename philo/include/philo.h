@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 19:20:47 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/20 10:28:01 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/21 11:17:14 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ typedef struct s_info
 	time_t			time_to_sleep;
 	int				must_eat_count;
 	bool			sim_stop;
+	bool	simulation_started;
 	pthread_mutex_t	sim_stop_lock;
+	pthread_mutex_t	start_mutex;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	*fork_locks;
 	t_philo			**philos;
