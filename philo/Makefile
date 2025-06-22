@@ -1,6 +1,6 @@
 NAME    = philo
 CC      = cc
-CFLAGS  = -Wall -Werror -Wextra -fsanitize=thread -g
+CFLAGS  = -Wall -Werror -Wextra #-fsanitize=thread -g
 HEADER = include/philo.h
 
 SRCS    = src/main.c src/init.c src/philosopher.c \
