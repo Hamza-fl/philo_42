@@ -6,7 +6,7 @@
 /*   By: hfalati <hfalati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:20:16 by hfalati           #+#    #+#             */
-/*   Updated: 2025/06/21 12:28:04 by hfalati          ###   ########.fr       */
+/*   Updated: 2025/06/22 15:26:57 by hfalati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	start_philo_threads(t_info *info)
 
 	i = 0;
 	pthread_mutex_lock(&info->start_mutex);
-	info->simulation_started = false;
 	while (i < info->nb_philos)
 	{
 		if (pthread_create(&info->philos[i]->thread, NULL, \
@@ -34,14 +33,10 @@ bool	start_philo_threads(t_info *info)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < info->nb_philos)
-	{
-		info->philos[i]->last_meal = get_time_ms();
-		i++;
-	}
+	i = -1;
 	info->start_time = get_time_ms();
-	info->simulation_started = true;
+	while (++i < info->nb_philos)
+		info->philos[i]->last_meal = info->start_time;
 	pthread_mutex_unlock(&info->start_mutex);
 	return (true);
 }
